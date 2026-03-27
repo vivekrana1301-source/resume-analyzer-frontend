@@ -13,7 +13,7 @@ const Result = () => {
         const token = localStorage.getItem("token");
 
         const res = await fetch(
-          "http://localhost:5000/api/auth/latest-result",
+          "https://resume-analyzer-backend-6.onrender.com/api/auth/latest-result",
           {
             headers: {
               Authorization: `Bearer ${token}`

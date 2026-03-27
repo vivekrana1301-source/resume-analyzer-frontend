@@ -38,7 +38,7 @@ const Dashboard = () => {
     formData.append("jobDescription", jobDesc);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/resume", {
+      const res = await fetch("https://resume-analyzer-backend-6.onrender.com/api/auth/resume", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`

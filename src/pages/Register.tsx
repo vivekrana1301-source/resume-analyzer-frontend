@@ -76,7 +76,7 @@ const Register = () => {
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value: /\S+@\S+\.\S+/,
+                value:/^[a-zA-Z0-9]+@[a-zA-Z]+\.[a-z]{2,}$/,
                 message: "Invalid email"
               }
             })}
@@ -93,8 +93,8 @@ const Register = () => {
             {...register("phone", {
               required: "Phone is required",
               pattern: {
-                value: /^[0-9]{10}$/,
-                message: "Phone must be 10 digits"
+                value: /^[6-9]\d{9}$/,
+                message: "Invalid.."
               }
             })}
             className="w-full mt-1 px-4 py-2 border rounded-lg"

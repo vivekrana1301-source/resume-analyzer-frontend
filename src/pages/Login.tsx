@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 
 
-type LoginDataType ={
+type LoginDataType = {
   email: string,
   password: string
 }
 
-type UserType={
+type UserType = {
   name: string,
   email: string,
   password: string
@@ -30,34 +30,44 @@ const Login = () => {
     });
   };
 
- const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  try {
-    const res = await fetch("https://resume-analyzer-backend-6.onrender.com/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loginData),
-    });
+    try {
+      const res = await fetch("https://resume-analyzer-backend-6.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      alert(data.msg || "Login failed");
-      return;
+      if (!res.ok) {
+        alert(data.msg || "Login failed");
+        return;
+      }
+
+      // Save logged in user in localStorage (or state)
+      localStorage.setItem("token", data.token)
+      localStorage.setItem("auth", JSON.stringify(data.user))
+
+      navigate("/dashboard"); // redirect after successful login
+
+    } catch (error) {
+      console.log(error);
+      alert("Server error");
     }
 
-    // Save logged in user in localStorage (or state)
-    localStorage.setItem("token", data.token)
-    localStorage.setItem("auth", JSON.stringify(data.user))
+  };
 
-    navigate("/dashboard"); // redirect after successful login
+  useEffect(() => {
+    const token = localStorage.getItem('token')
 
-  } catch (error) {
-    console.log(error);
-    alert("Server error");
-  }
-};
+    if (token) {
+      
+      navigate("/dashboard");
+    }
+  }, [])
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import type { DemoDataType } from "../types/result.js";
+import Header from "../components/Header.js";
 
 
 
@@ -47,6 +48,9 @@ const Result = () => {
   } = data;
 
   return (
+    <>
+    <Header/>
+    
     <div className="min-h-screen bg-gray-100 p-10">
 
       {/* 🔥 Score */}
@@ -198,6 +202,7 @@ const Result = () => {
       </div>
 
     </div>
+    </>
   );
 };
 

@@ -21,6 +21,7 @@ const Header = () => {
 
   // ✅ better naming
   const handleLogout = () => {
+    localStorage.removeItem("token");
     localStorage.removeItem("auth");
     navigate("/login");
   };
